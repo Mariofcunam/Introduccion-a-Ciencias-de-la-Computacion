@@ -1,0 +1,7 @@
+Actividad 2.1
+En la clase Byte encuentro relevante MAX_VALUE ya que contiene la constante
+del valor máximo que un byte puede tener, 2⁷-1, tambien encuentro relevante
+MIN_VALUE que contiene la constante del valor máximo que un byte puede tener,
+-2⁷.
+
+Al sumarle +1 a MAX_VALUE los byte regresaron a su valor minímo.

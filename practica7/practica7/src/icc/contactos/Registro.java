@@ -45,6 +45,7 @@ public class Registro{
 	this.direccion = direccion;
 	this.telefono = telefono;
     }
+
     /**
      *Metodo para obtener nombre
      *@return nombre-nombre del contacto
@@ -87,7 +88,7 @@ public class Registro{
      */
     public void setDireccion(String direccion){
 	if(direccion == null){
-	    throw new IllegalArgumentException("La direccion del contacto no se ncuentra en el registro");
+	    throw new NullPointerException("La direccion del contacto no se ncuentra en el registro");
 	}else{
 	    this.direccion = direccion;
 	}
@@ -98,7 +99,7 @@ public class Registro{
      */
     public void setTelefono(String telefono){
 	if(telefono == null){
-	    throw new IllegalArgumentException("El telefono del contacto no se encuentra en el registro");
+	    throw new NullPointerException("El telefono del contacto no se encuentra en el registro");
 	}else{
 	    this.telefono = telefono;
 	}
@@ -122,23 +123,8 @@ public class Registro{
      *@return String - cadena de los daltos almacenados del registro
      */
     public String toString(){
-	return nombre+direccion+telefono;
+	return nombre+ " " + direccion +" " + telefono;
     }
-    /**
-     *Método privado para comparar registros
-     *@return 0 
-     */
-    int compare(Registro reg){
-	int n = this.nombre.compareTo(reg.nombre);
-	if(n > 0){
-	    return 1;
-	}else{
-	    if(n < 0){
-		return -1;
-	    }else{
-		return n;
-	    }
-	}
-    }
+ 
 }
 

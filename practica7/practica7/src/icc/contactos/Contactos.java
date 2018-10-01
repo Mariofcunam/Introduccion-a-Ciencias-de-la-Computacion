@@ -1,6 +1,6 @@
 /* -------------------------------------------------------------------
  * Contactos.java
- * versión 4.0
+ * versión 6.0
  * Copyright (C) 2018  Mario Navarrete Baltazar.
  * Facultad de Ciencias,
  * Universidad Nacional Autónoma de México, Mexico.
@@ -33,7 +33,6 @@ public class Contactos{
     private Registro contacto1=null;
     /**
      *Constructor de clase contactos
-     *@paran contacto1 - primer contacto
      */
     public Contactos(){
 	this.contacto1=null;
@@ -43,45 +42,81 @@ public class Contactos{
      *@param reg - Registro del nuevo contacto
      */
     public void insertaContacto(Registro reg){
-			
+	Registro aux=null;
+	Registro anterior=null;
+	Registro actual=null;
+	if(contacto1==null){
+	    contacto1=reg;
+	}else if(contacto1.getSiguiente()==null){
+	    if(contacto1.getNombre().compareTo(reg.getNombre())>0){
+		aux=contacto1;
+		contacto1 = reg;
+		contacto1.setSiguiente(aux);
+	    }else
+		contacto1.setSiguiente(reg);
+	    
+	}else{
+	    anterior = null;
+	    actual = this.contacto1;
+	    while(actual!=null){
+		if(actual.getNombre().compareTo(reg.getNombre()) >= 0){
+		    aux = actual;
+		    if(anterior!=null)
+			anterior.setSiguiente(reg);
+		    else
+			this.contacto1=reg;
+			reg.setSiguiente(reg);
+			break;
+		}
+		else if(actual.getNombre().compareTo(reg.getNombre()) < 0){
+		    anterior=actual;
+		    actual=actual.getSiguiente();
+		    if(actual==null){
+			anterior.setSiguiente(reg);
+			break;
+		    }
+		}
+	    }
+	}
     }
     
+		    
+		    
     
-    
-	    
-			
-    
-			
+		
     /**
      *Metodo para imprimir contactos en orden alfabetico
      */
     public void imprimeContactos(){
-	System.out.println(toString());
+	Registro reg = contacto1;
+	String s = " ";
+	while(reg !=null){
+	    s = s + reg.toString() + "\n";
+	    System.out.println(s);	Registro aux = null;
+	    reg = reg.getSiguiente();
+	} 
+ 
     }
+    
     /**
      *Metodo para consultar un registro
+     *@param nombre - nombre que sera pasado
+     *@return aux o null si no hay contacto  
      */
     public Registro consultar(String nombre){
+	Registro aux = contacto1;
+	if(nombre==null)
+	    throw new NullPointerException("No se encontro el contacto");
+	while(aux!=null){
+	    if(aux.getNombre().equals(nombre)){
+		return aux;
+	    }else if(aux.getDireccion().equals(nombre)){
+		return aux;
+	    }
+	    aux=aux.siguiente;
+	}
 	return null;
     }
-
-		
-     /**
-     *Método String para regresar una cadena
-     *@return s  
-     */
-   
-    public String toString(){
-	Registro aux = null;
-	Registro reg = aux;
-	String s = " ";
-	while(aux !=null){
-	    s = s + aux.toString() + "\n";
-	    aux = aux.siguiente;
-	} 
-	return s;
-    }
-	    
-       
+ 
     
 }

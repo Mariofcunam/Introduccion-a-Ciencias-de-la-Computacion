@@ -26,79 +26,67 @@
  * -------------------------------------------------------------------
  */
 package icc.ajedrez;
+import java.util.LinkedList;
 /**
  *Clase abstractica para piezas
  */
 public abstract class Pieza{
-    protected int renglon = 0;
-    protected char columna = null;
-    protected boolean color = false;
-    
+    protected Posicion  posicion;
+    protected boolean color;
+    protected int renglon;
+    protected char columna;
     /**
      *Constructor para clase pieza
      *@param renglon -- renglon en el que se encuentra la pieza
      *@param columna -- renglon en el que se encuentra la columna
      */
     public Pieza(int renglon, char columna){
-	this.renglon=renglon;
-	this.columna=columna;
+	posicion = new Posicion(renglon, columna);
+	color = true;
     }
     /**
-     *Metodo para obtener renglon de la pieza
-     *@return renglon - renglon de la pieza
+     *Metodo abstracto que regresa una lista de los posibles movimientos
      */
-    public int getRenglon(){
-	return renglon;
-    }
+    public abstract LinkedList<Posicion> posiblesMovimientos();
     /**
-     *Metodo para asignar renglon en la que se encunetra la pieza
-     *@param renglon - renglon en la que se encuentra la pieza
-     *@throws IllegalArgumentException - Exception si el parametro pasado es 
-     *incorrecto
+     *Metodo booleano que verfica que la posicion es valida
+     *@param renglon--renlgon en el que se encuentra
+     *@param columna--columna en la que se encunetra la pieza
      */
-    public void setRenglon(int reglon){
-	if(renglon <1 || renglon>8){
-	    throw new IllegalArgumentException("El valor debe ser entre 1 y 8");
-	}else{
-	    this.renglon=renglon;
-	}
-    }
+     
+    public abstract boolean esValida(int renglon, char columna);
     /**
-     *Metodo para obtener columna de la posicion indicada.
-     *@return columna - columna en la que se encunentra la pieza
+     *Metodo que regresa una cadena de strings que representa el estado de la 
+     *pieza
      */
-    public char getColumna(){
-	return columna;
+    public abstract String  toString();
+    /**
+     *Metodo que asigna renglon
+     *@param renglon - renglon al que se le asignara la pieza
+     */
+    public void setRenglon(int renglon){
+	posicion.setRenglon(renglon);
     }
     /**
-     *Metodo para asignar columna en la que se encunetra la pieza
-     *@param columna - columna en la que se encuentra la pieza
-     *@throws IllegalArgumentException - Exception si el parametro pasado es
-     *incorrecto
+     *Metodo que asigna una columna
+     *@param columna - columna en la que se le asignara la pieza
      */
     public void setColumna(char columna){
-	if(columuna != 'a'|'b'|'c'|'d'|'e'|'f'|'g'|'h'){
-	    throw new IllegalArgumentException("Valor invalido");
-	}else{
-	    this.columna=columna;
-	}
+	posicion.setColumna(columna);
     }
     /**
-     *Metodo abstracto para que da una lista con las posiciones de todas las 
-     *casillas que se podria mover esta pieza.
+     *Metodo para obtener el renglon
+     *@return posicion.getReglon - renglon en el que se encuentra la pieza
      */
-    public Lista posiblesMovimientos();
-
+    public int getRenglon(){
+	return posicion.getRenglon();
+    }
     /**
-     *Metodo abstracto que indica si el movimiento sera valido para mover la
-     *pieza hasta su posicion actual
-     *@param renglon - renglon en que se encuentra la pieza
-     *@param columna - columna en el que se encuentra la pieza
+     *Metodo para obtener la columna
+     *@return posicion.getColumna - columna en el que se encunetra la ppieza
      */
-    public boolean esValida(int renglon, char columna);
-    
-    /**
-     *Metodo abstracto que devuelve una presentacion con cadena de la pieza
-     *y su estado actual
-     */
-    public boolean toString();
+    public char getColumna(){
+	return posicion.getColumna();
+    }
+}
+	

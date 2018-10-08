@@ -34,7 +34,8 @@ import java.util.Scanner;
  * @author blackzafiro
  */
 public class UsoAjedrez {
-	private Scanner scanner;
+    private Scanner scanner;
+    
     
     /**
      * Crea la interfaz de usuario para manejar un plantío con magueyes, cempohualxochitl y rosas.
@@ -48,7 +49,7 @@ public class UsoAjedrez {
      * @param mensaje
      * @return 
      */
-    private int leeEntero(String mensaje) {
+    private int leeEntero(String mensaje){
         System.out.println(mensaje);
         boolean error = false;
         int num = -1;
@@ -58,15 +59,39 @@ public class UsoAjedrez {
                 error = true;
                 System.out.println("El valor más chico posible es uno.");
             }
-        } catch (NumberFormatException nfe) {
+        } catch(NumberFormatException nfe){
             error = true;
             System.out.println("Por favor ingresa un número válido.");
         }
-        if (error) {
+        if (error){
             num = leeEntero(mensaje);
         }
         return num;
     }
+
+    /**
+     * Pide un número al usuario.
+     * @param mensaje
+     * @return 
+     */
+    private char leeChar(String mensaje) {
+        System.out.println(mensaje);
+        boolean error = false;
+        int num = -1;
+	char a = (char) num;
+        try {
+            num = scanner.nextLine().charAt(0);
+            
+        } catch (Exception nfe) {
+            error = true;
+            System.out.println("Por favor ingresa un número válido.");
+        }
+        if (error) {
+            a  = leeChar(mensaje);
+        }
+        return a;
+    }
+    
     
 
     /**
@@ -77,66 +102,86 @@ public class UsoAjedrez {
         System.out.println("1) Menu de Rey");
         System.out.println("2) Menu de Reyna");
         System.out.println("3) Menu de caballo");
-        System.out.println("4) Salir");
+	System.out.println("4) Menu de Torre");
+        System.out.println("5) Salir");
     }
 
     private void imprimePiezaMenu() {
         System.out.println("Opciones:");//Escribir donde van las piezas(es decir regresar toString de cada pieza
-        System.out.println("1) Mover posicion ");
+        System.out.println("1) Validar posicion ");
         System.out.println("2) Lista de posiciones ");
         System.out.println("3) Salir");
     }
     
     public void corre() {
-	Registro reg;
-	
-        System.out.println(" *** Lista de contactos *** ");
+        System.out.println(" *** Lista de ajedrez *** ");
         boolean continuar = true;
+	int renglon;
+	char columna;
+	Pieza pieza;
+	Rey rey = new Rey(8, 'h');
+	Reyna reyna = new Reyna(6,'a');
+	Caballo caballo =  new Caballo(2, 'c');
+	Torre torre = new Torre(1, 'b');
 	int opc;
-	Pieza p;
-	Rey rey;
-	Reyna reyna;
-	Caballo cab;
+	boolean esValida;
         while(continuar) {
             imprimeMenu();
             int opcion = leeEntero("Selecciona una opción:");
             switch(opcion) {
-                case 1:
-		    imprimePiezaMenu();
-		    opc = leeEntero("Selecciona opcion");
-		    switch(opcion){
-		    case 1://Cambiar posicion de ficha actual
-			//Hacer metodo leerChar, revisar excepcion y utilizar un
-			//try-catch
-			break;
-                case 2:
-		    imprimePiezaMenu();
-		    opc = leeEntero("Selecciona opcion");
-		    break;
-                case 3:
-		    if(opc == 1){
-			p = rey;
-		    }else if(opc == 2){
-			p = reyna;
+	    case 1:
+	    case 2:
+	    case 3:
+	    case 4:
+		if (opcion == 1){
+		    pieza = rey;
+		}else if(opcion == 2){
+		    pieza = reyna;
+		}else if(opcion == 3){
+		    pieza = caballo;
+		}else if(opcion == 4){
+		    pieza = torre;
+		}else{
+		    pieza=rey;
+		}
+		System.out.println(pieza.toString());
+		imprimePiezaMenu();
+		opc= leeEntero("Selecciona opcion");
+		switch(opc){
+		case 1:
+		    renglon = leeEntero("Selecciona un renglon (1-8)");
+		    columna = leeChar("Selecciona un renglon [a-h]");
+		    esValida=pieza.esValida(renglon,columna);
+		    System.out.print("La posicion nueva de la pieza");
+		    if (!esValida){
+			System.out.println("No es valida ");
 		    }else{
-			p = cab;
+			try{
+			pieza.setRenglon(renglon);
+			pieza.setColumna(columna);
+			}catch(IllegalArgumentException e){
+			    System.out.println(e);
+			}
 		    }
-		    imprimePiezaMenu();
-		    opc = leeEntero("Selecciona opcion");
-		    switch(opc){
-		    case 1:
-			p;
-			break;
-		    case 2:
-			break;
-		    default:
-			break;
-		    }
+		    System.out.println("Si es valida");
 		    break;
-		    case 4:
-			continuar = false;
-			break;
-		    default:
+		case 2:
+		    System.out.println(pieza.posiblesMovimientos().toString());
+		    break;
+		case 3:
+		    System.out.println("Regresando al menu anterior");
+		    break;
+			
+		default:
+		    System.out.println("Opcion invalida.");
+		    break;
+		}
+		
+		break;
+	    case 5:
+		continuar=false;//Salir de la opcion
+		break;
+	    default:
 			System.out.println("Esa no es una opción válida del menú.");
             }
         }
@@ -145,7 +190,8 @@ public class UsoAjedrez {
     
     
     public static void main(String[] args) {
-        IUContactos interfaz = new IUContactos();
+        UsoAjedrez interfaz = new UsoAjedrez();
         interfaz.corre();
     }
 }
+

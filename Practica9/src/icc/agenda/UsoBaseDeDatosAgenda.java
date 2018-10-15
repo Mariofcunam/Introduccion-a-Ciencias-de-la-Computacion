@@ -36,16 +36,25 @@ public class UsoBaseDeDatosAgenda {
 
 	public static void main(String[] args) {
 		// TODO: Crear un par de BaseDeDatosAgenda y realizar algunas consultas.
-	    String nombre = " ";
-	    int telefono=0;
-	    BaseDeDatosAgenda tablauno = new BaseDeDatosAgenda(tabla1, TAM_NOMBRE, TAM_DIRECCION, TAM_TELEFONO);
-	    BaseDeDatosAgenda tablados = new BaseDeDatosAgenda(tabla2, TAM_NOMBRE, TAM_DIRECCION, TAM_TELEFONO);
+	
+	    
+	    String name ="Florentino Ariza";
+	    String name1="Eligio García Agusto";
+	    String telephone = "55551221";
+	    int result = Integer.parseInt(telephone);
+	    String telephone1="56344325";
+	    int result1=Integer.parseInt(telephone1);
+	    BaseDeDatosAgenda searchName = new BaseDeDatosAgenda(tabla1, TAM_NOMBRE,TAM_DIRECCION, TAM_TELEFONO);
+	    System.out.println(searchName.dameRegistroPorNombre(name));
+	    BaseDeDatosAgenda searchTelephone = new BaseDeDatosAgenda(tabla1, TAM_NOMBRE,TAM_DIRECCION, TAM_TELEFONO);
+	    System.out.println(searchTelephone.dameRegistroPorTelefono(result));
+	    BaseDeDatosAgenda searchName1 = new BaseDeDatosAgenda(tabla2, TAM_NOMBRE, TAM_DIRECCION, TAM_TELEFONO);
+	    System.out.println(searchName1.dameRegistroPorNombre(name1));
+	    BaseDeDatosAgenda searchTelephone1 = new BaseDeDatosAgenda(tabla2, TAM_NOMBRE,TAM_DIRECCION, TAM_TELEFONO);
+	    System.out.println(searchTelephone1.dameRegistroPorTelefono(result1));
 
-	    BaseDeDatosAgenda consultaporNombre = new BaseDeDatosAgenda(tabla1, TAM_NOMBRE, TAM_DIRECCION, TAM_TELEFONO);
-	    System.out.println(consultaporNombre.dameRegistroPorNombre(nombre));
-
-	    BaseDeDatosAgenda consultaporTelefono = new BaseDeDatosAgenda(tabla1, TAM_NOMBRE, TAM_DIRECCION, TAM_TELEFONO);
-	    System.out.println(consultaporTelefono.dameRegistroPorTelefono(telefono));
+	    
+	    
 	}
 }
 

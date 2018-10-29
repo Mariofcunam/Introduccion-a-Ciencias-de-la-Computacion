@@ -3,7 +3,7 @@
 
 	<!-- Escribe aquí el nombre de la clase con tu método main -->
 	<property name="mainclass" value="UsoBaseDeDatos"/>
-	<property name="pck"       value="persistencia"/>
+	<property name="pck"       value="util"/>
 
 	<property name="src"   location="src"/>
 	<property name="build" location="build"/>

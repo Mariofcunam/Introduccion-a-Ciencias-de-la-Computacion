@@ -47,22 +47,13 @@ public class Astro {
      * Constructor.
      * @param diametro Pixeles de diámetro.
      */
-    public Astro(double diametro,String link) {
+    public Astro(double diametro) {
 		nodo = new StackPane();
 		nodo.setBackground(new Background( new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
 		nodo.setStyle("-fx-background-color: Color.TRASPARENT;");
 		nodo.setMaxSize(100, 100);
 		figura = new Sphere(diametro);
 		nodo.getChildren().add(figura);
-
-		String link1;
-		Material material = new PhongMaterial();
-		Image dmap = new Image(link1);
-
-		material.setDiffuseMap(dmap);
-		material.setSpecularColor(Color.YELLOW);
-
-		figura.setMaterial(material);
     }
 	
     /**
